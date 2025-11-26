@@ -3,6 +3,13 @@ set -e
 
 echo "=== SEOFlow Setup ==="
 
+# DNS (au cas où)
+echo 'nameserver 8.8.8.8' > /etc/resolv.conf
+sleep 2
+
+# Update
+apt-get update
+
 # Base packages
 echo "Installing base packages..."
 apt-get install -y openssh-server sudo git nano python3 python3-pip samba

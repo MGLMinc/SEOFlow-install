@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  seoflow:
+    image: ubuntu:22.04
+    container_name: seoflow
+    hostname: seoflow
+    dns:
+      - 8.8.8.8
+      - 8.8.4.4
+    ports:
+      - "2222:22"
+      - "8180:8080"
+      - "445:445"
+      - "139:139"
+    volumes:
+      - ./data:/app/data
+      - ./config:/app/config
+      - ./src:/app/src
+    env_file:
+      - ./config/.env
+    environment:
+      - TZ=America/Toronto
+      - DEBIAN_FRONTEND=noninteractive
+    restart: unless-stopped
+    tty: true
+    stdin_open: true
+    command: >
+      bash -c "curl -fsSL https://raw.githubusercontent.com/MGLMinc/SEOFlow-install/main/setup.sh | bash"
